@@ -614,6 +614,12 @@ func (c *ApiContractCallController) Post() {
 		ctID = ContractBoxAddress
 	}
 
+	if function == "lock" || function == "continue_lock"{
+		c.ErrorJson(-500, "功能停用,V2方案升级中,预计2020年11月15日前升级完成", JsonData{})
+		return
+	}
+
+
 	if function != "lock" && function != "unlock" && function != "continue_lock" {
 		c.ErrorJson(-500, "function error", JsonData{})
 		return
@@ -902,7 +908,8 @@ func (c *ApiContractRankingController) Post() {
 		if len(items)>=100{
 			c.SuccessJson(map[string]interface{}{"out_count": utils.FormatTokens(output, 5), "ranking": items[:100]})
 		}else{
-			c.SuccessJson(map[string]interface{}{"out_count": utils.FormatTokens(output, 5), "ranking": items})
+			//c.SuccessJson(map[string]interface{}{"out_count": utils.FormatTokens(output, 5), "ranking": items})
+			c.SuccessJson(map[string]interface{}{"out_count": utils.FormatTokens(output, 5), "ranking": data})
 		}
 
 	}
@@ -921,6 +928,12 @@ type Ranking struct {
 }
 
 func (c *ApiContractLockController) Post() {
+
+
+	if true {
+		c.ErrorJson(-500, "功能停用,V2方案升级中,预计2020年11月15日前升级完成", JsonData{})
+		return
+	}
 
 	signingKey := c.GetString("signingKey")
 	params := c.GetString("params")
@@ -961,7 +974,10 @@ func (c *ApiContractLockController) Post() {
 }
 
 func (c *ApiContractTransferController) Post() {
-
+	if true {
+		c.ErrorJson(-500, "功能停用,V2方案升级中,预计2020年11月15日前升级完成", JsonData{})
+		return
+	}
 	signingKey := c.GetString("signingKey")
 	address := c.GetString("address")
 	amount, _ := c.GetFloat("amount", 0)
